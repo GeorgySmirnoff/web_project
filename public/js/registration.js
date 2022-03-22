@@ -75,6 +75,22 @@ btn.onclick = function() {
     // console.log("onclick foo!")
     // // alert("Complite!")
 }
+
+const myEmail = localStorage.getItem('email');
+if(myEmail != null){
+    const entrance = document.getElementsByClassName('header__entrance_button')
+    entrance[0].innerHTML = myEmail
+    const form = document.getElementsByClassName('form')
+    form[0].innerHTML = `<a href="" id="exit" style="margin: 100px 0 500px; font-size: 30px ">Выйти</a>`
+}
+
+exit.onclick = function(){
+    localStorage.setItem('email1', localStorage.getItem('email'));
+    localStorage.setItem('password1', localStorage.getItem('password'));
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+}
+
 // storing input from register-form
 
 // check if stored data from register-form is equal to entered data in the   login-form

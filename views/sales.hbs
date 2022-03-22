@@ -1,51 +1,9 @@
 <!DOCTYPE html>
 <html lang='ru'>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- позволяет делать сайт адаптивным -->
-        <script src="/js/script.js"></script>
-		<link rel="stylesheet" href="css/style2.css">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat:regular,500,600,700,900&display=swap&subset=cyrillic-ext" rel="stylesheet" />
-		<title>Gogo Pizza</title>
-	</head>
+  {{>head}}
 	<body>
 		<div class="wrapper"><!--элементы лежащие внутри него, при выходе за границы "wrapper'a", не выступали -->
-			<header class="header">
-				<div class="header__container">
-					<a href="index.hbs" class="logo"><img src="https://user80515.clients-cdnnow.ru/2b-ru/1601564989213_392x320.jpeg" height="80px" alt=""></a>
-					<ul class="menu__list">
-						<li class="menu__item">
-							<a href="sales.html" class="menu__link active_link">Акции</a>
-						</li>
-						<li class="menu__item">
-							<a href="pizza.html" class="menu__link">Пицца</a>
-						</li>
-						<li class="menu__item">
-							<a href="drinks.html" class="menu__link">Напитки</a>
-						</li>
-						<li class="menu__item">
-							<a href="#" class="menu__link">Создать пиццу</a>
-						</li>
-					</ul>
-					<div class="header__entrance">
-						<a href="registration.html" class="header__entrance_button">
-							Войти
-						</a>
-						<a href="" class="header__basket">
-							<img src="img/basket-full.svg" class="basketFull">
-						</a>
-						<a href="" class="header__price">
-							0 руб.
-						</a>
-						<a href="" class="header__arrow">
-							<img src="img/arrow-down.svg" class="arrowDown">
-						</a>
-						<a class="header__burger_menu">
-							<img src="https://www.clipartmax.com/png/middle/36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" width='30px' alt="">
-						</a>
-					</div>
-				</div>
-			</header>
+      {{>header}}
 
 
             <div class="section_name">
@@ -194,34 +152,12 @@
 						</div>
 					</div>
 				</div> -->
-				
-				<div class="text-aboutus">
-					<h1>Доставка еды</h1>
-					<span>Впереди вечеринка? Корпоратив в офисе? Не знаете, чем угощать гостей? У Domino’s есть решение: доставка пиццы на вечеринку, доставка пиццы на корпоратив, доставка пиццы на день рождения, доставка пиццы на дом, заказ пиццы с собой, разнообразные акции и скидки на любой вкус! На доставку и на вынос! Комбо и сеты для большой компании, закуски и напитки в подарок, скидки на пиццу с собой в Domino's Pizza в Ростове-на-Дону.</span>
-					<h2>Пиццы по акции</h2>
-					<span>Лень готовить. Плохая погода за окном. Вечер, вы устали, хотите отдохнуть и поесть что-нибудь вкусненькое. Или в гости нагрянули друзья без предупреждения. Что делать? Быстрая бесплатная доставка пиццы Domino’s спешит на помощь! Сделайте заказ онлайн на сайте, в мобильном приложении или по телефону и занимайтесь своими делами. А через 30 минут вкусная ароматная горячая пицца будет у вас! Возможна оплата картой или наличными.</span>
-					<h2>Промокоды на пиццу
-					</h2>
-					<span>
-                        Domino’s предлагает различные промокоды на пиццу и купоны со скидками. Введите промокод в специальном окне и активируйте его перед заказом онлайн! Следите за нашими обновлениями, подписывайтесь в социальных сетях и на e-mail рассылку, устанавливайте приложение!
-					</span>
-				</div>
+
+        {{>textAboutUs}}
 			</main>
 
-			
-
-			<footer class="footer">
-				<div class="footer__container">
-					<a href="#" class="logo"><img  src="/img/google_play_logo.png" alt=""></a>
-					<!-- <a href="#" class="logo"><img  src="/img/apple_logo.png" height="80px" alt=""></a> -->
-					<span>Среднее время доставки 30 минут</span>
-					<div class="social_platforms">
-						<a href="#" class="logo"><img  src="https://i.pinimg.com/originals/d4/0e/1e/d40e1ed6bc563a0eb5fd06cee0d1ac37.jpg" alt=""></a>
-						<a href="#" class="logo"><img  src="/img/facebook_logo.png" alt=""></a>
-					</div>
-				</div>
-			</footer>
+      {{>footer}}
 		</div>
-		<script src="js/script.js"></script>
+		<script src="js/script.js"> </script>
 	</body>
 </html>

@@ -5,33 +5,32 @@ export class AppController {
   @Get('/')
   @Render('index')
   root() {
-    return { };
+    return { user: '' };
   }
 
   @Get('drinks')
   @Render('drinks')
-  root2() {
-    return { };
+  drinks() {
+    return {};
   }
 
   @Get('pizza')
   @Render('pizza')
   root3() {
-    return { };
+    return {
+      user: { login: 'user' },
+    };
   }
 
   @Get('registration')
   @Render('registration')
   root4() {
-    return { };
+    return {};
   }
 
   @Get('sales')
   @Render('sales')
   root5() {
-    return { };
+    return {};
   }
-
-
-
 }

@@ -15,9 +15,10 @@
         <a href="#" class="menu__link">Создать пиццу</a>
       </li>
     </ul>
+    {{#if user}}
     <div class="header__entrance">
       <a href="/registration" class="header__entrance_button">
-        Войти
+        smirgoff@mail.ru
       </a>
       <a href="" class="header__basket">
         <img src="img/basket-full.svg" class="basketFull">
@@ -32,5 +33,25 @@
         <img src="https://www.clipartmax.com/png/middle/36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" width='30px' alt="">
       </a>
     </div>
+    {{else}}
+      <div class="header__entrance">
+        <a href="/registration" class="header__entrance_button">
+          Войти
+        </a>
+        <a href="" class="header__basket">
+          <img src="img/basket-full.svg" class="basketFull">
+        </a>
+        <a href="" class="header__price">
+          0 руб.
+        </a>
+        <a href="" class="header__arrow">
+          <img src="img/arrow-down.svg" class="arrowDown">
+        </a>
+        <a class="header__burger_menu">
+          <img src="https://www.clipartmax.com/png/middle/36-365828_navbar-toggle-icon-menu-hamburger-png-white.png" width='30px' alt="">
+        </a>
+      </div>
+      {{user}}
+    {{/if}}
   </div>
 </header>

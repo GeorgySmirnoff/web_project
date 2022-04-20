@@ -12,40 +12,42 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
   password String
-  username  String? @unique
-  Cart  Cart[]
+  username String? @unique
+  Cart     Cart[]
 }
 
 model Item {
-  id          Int     @id @default(autoincrement())
-  name        String? @unique
+  id          Int          @id @default(autoincrement())
+  name        String?      @unique
   image       String?
   description String?
   price       Float
-  type        Types
-  Cart        Cart[]   @relation( references: [id])
+  category    ItemCategory @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  Cart        Cart[]       @relation(references: [id])
   cartId      Int?
 }
 
 model Cart {
   id     Int    @id @default(autoincrement())
   User   User   @relation(references: [id], fields: [userId])
-  Item  Item[] @relation(references: [id])
+  Item   Item[] @relation(references: [id])
   userId Int
   itemId Int
 }
 
-model Sale{
-  id Int @id @default(autoincrement())
-  name String @unique
+model Sale {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
   image       String
   description String
 }
 
-enum Types {
-  Pizza
-  Drink
+model ItemCategory {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  Item Item
 }

@@ -1,73 +1,65 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## Автор
+___
+Смирнов Георгий Александрович, группа M33031
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Описание
+___
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Посмотреть приложение на хостинге heroku можно по ссылке: <a href="https://gogo-pizza.herokuapp.com/" target="blank">Gogo Pizza</a>
 
-## Description
+## ERD
+___
+<img src="db_pizza.png" alt="ERD" />
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+* ### User
 
-## Installation
+  Пользователь - основная сущность в системе.
 
-```bash
-$ npm install
-```
+    * **id** - уникальный идентификатор пользователя в системе. Генерируется автоматически
+    * **email** - обязательное текстовое поле.Значение должно быть уникальным в системе.
+    * **password** - обязательное текстовое поле. Значение должно быть униккально.
+    * **username** - необязательное текстовое поле. Можно заменить в любой момент, уникальность не требуется
 
-## Running the app
+  Также, у каждого пользователя есть связанная с ним корзина,в которой могут хранится элементы Item. 
+    * **Cart** - собирается из таблицы Cart.
+  
+* ### Item
 
-```bash
-# development
-$ npm run start
+  Сущность, которая может быть одной из категорий. Необходима для создания для таких элементов как пицца,напитки и т.д.
 
-# watch mode
-$ npm run start:dev
+    * **id** - уникальный идентификатор поста в системе. Генерируется автоматически
+    * **name** - Уникальное текстовое поле, может быть пустым. Должно быть уникально.
+    * **image** - Текстовое поле заполняется по желанию (ссылка на изображение). 
+    * **description** - Текстовое поле , описание товара. 
+    * **price** - Обязательное поле, числовая строка - цена товара.
+    * **category** - Категория к которой относится Item.
+    * **categoryId** - С помощью categoryID Item связываетсят с категорией.
+    * **Cart** - Корзина.
+    * **cartId** - С помощью cartId Item связываетсят с корзиной.
+    * 
+* ### Cart
 
-# production mode
-$ npm run start:prod
-```
+  Сущность Cart - в ней хранятся Items.
 
-## Test
+    * **id** - уникальный идентификатор категории поста в системе. Генерируется автоматически
+    * **User** - Обязательное текстовое поле.
+    * **Item** - список items.
+    * **userId** - поле для связи cart и user
+    * **itemId** - поле для связи cart и item
 
-```bash
-# unit tests
-$ npm run test
+* ### Sale
 
-# e2e tests
-$ npm run test:e2e
+  Сущность, хранящая в себе картинку , название и описание.
 
-# test coverage
-$ npm run test:cov
-```
+    * **id** - уникальный идентификатор картинки в системе. Генерируется автоматически
+    * **image** - Обязательное текстовое поле. URL, по которому хранится необходимая картинка. Можно изменить в любой момент, уникальность не требуется.
+    * **name** - Обязательное текстовое поле. Можно изменить в любой момент, уникальность не требуется.
+    * **description** - Обязательное текстовое поле. Описание, связанное с текущей картинкой. Можно изменить в любой момент.
+   
+* ### ItemCategory
 
-## Support
+  Категория Item
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+    * **id** - уникальный идентификатор категории картинки в системе. Генерируется автоматически
+    * **name** - Обязательное текстовое поле.
+    * **Item** - название Item

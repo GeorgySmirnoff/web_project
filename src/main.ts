@@ -4,6 +4,7 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import * as hbs from 'hbs';
 import { LoadingInterceptor } from './timeInterceptop';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -16,6 +17,15 @@ async function bootstrap() {
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
 
   app.useGlobalInterceptors(new LoadingInterceptor());
+
+  const config = new DocumentBuilder()
+    .setTitle('GogoPizza')
+    .setDescription('Pizza delivery API description')
+    .setVersion('1.0')
+    .addTag('pizza')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   const port = parseInt(process.env.PORT) || 3000;
   await app.listen(port);

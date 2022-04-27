@@ -50,7 +50,7 @@ export class SaleController {
     description: 'Not found',
   })
   @Post(':name')
-  async addSale(@Param('name') name: string): Promise<SaleRO> {
+  async createSale(): Promise<SaleRO> {
     throw new NotImplementedException();
   }
 

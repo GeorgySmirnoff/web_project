@@ -33,7 +33,7 @@ export class ItemCategoryController {
     description: 'Category not found.',
   })
   @Get(':id')
-  async getCategory(@Param('id') id: number): Promise<ItemCategoryRO> {
+  async getCategoryById(): Promise<ItemCategoryRO> {
     throw new NotImplementedException();
   }
 
@@ -48,10 +48,8 @@ export class ItemCategoryController {
     status: 404,
     description: 'Category not found.',
   })
-  @Get('byName/:name')
-  async getCategoryByName(
-    @Param('name') name: string,
-  ): Promise<ItemCategoryRO> {
+  @Get(':name')
+  async getCategoryByName(): Promise<ItemCategoryRO> {
     throw new NotImplementedException();
   }
 
@@ -66,13 +64,13 @@ export class ItemCategoryController {
     status: 403,
     description: 'Forbidden.',
   })
-  @Post('add/:name')
+  @Post(':name')
   async addCategory(@Param('name') name: string): Promise<ItemCategoryRO> {
     throw new NotImplementedException();
   }
 
   @ApiOperation({
-    summary: 'Delete category by id.r',
+    summary: 'Delete category by id',
   })
   @ApiResponse({
     status: 200,
@@ -87,7 +85,7 @@ export class ItemCategoryController {
     description: 'Category not found.',
   })
   @Delete(':id')
-  async deleteItem(@Param('id') id: number): Promise<ItemCategoryRO> {
+  async deleteCategory(@Param('id') id: number): Promise<ItemCategoryRO> {
     throw new NotImplementedException();
   }
 }

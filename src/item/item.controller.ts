@@ -33,23 +33,7 @@ export class ItemController {
     description: 'Item not found.',
   })
   @Get(':id')
-  async getItem(@Param('id') id: number): Promise<ItemRO> {
-    throw new NotImplementedException();
-  }
-
-  @ApiOperation({
-    summary: 'Get pizza by name',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Pizza is found.',
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Pizza not found.',
-  })
-  @Get('byName/:name')
-  async getByName(@Param('name') name: string): Promise<ItemRO> {
+  async getItem(): Promise<ItemRO> {
     throw new NotImplementedException();
   }
 
@@ -64,8 +48,8 @@ export class ItemController {
     status: 403,
     description: 'Forbidden.',
   })
-  @Post('add/:name')
-  async addItem(@Param('name') name: string): Promise<ItemRO> {
+  @Post(':name')
+  async addItem(): Promise<ItemRO> {
     throw new NotImplementedException();
   }
 

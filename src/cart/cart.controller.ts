@@ -4,9 +4,11 @@ import {
   Get,
   NotImplementedException,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SaleRO } from '../sale/sale.interface';
 
 @ApiTags('cart')
 @Controller('cart')
@@ -26,8 +28,9 @@ export class CartController {
   async getCart(@Param('id') id: number) {
     throw new NotImplementedException();
   }
+
   @ApiOperation({
-    summary: 'Add new Item',
+    summary: 'Add new cart',
   })
   @ApiResponse({
     status: 200,
@@ -37,8 +40,8 @@ export class CartController {
     status: 404,
     description: 'Item not found',
   })
-  @Post('add/:name')
-  async postItem(@Param('id') id: number) {
+  @Post(':id')
+  async postItem() {
     throw new NotImplementedException();
   }
 
@@ -54,7 +57,15 @@ export class CartController {
     description: 'Item not found.',
   })
   @Delete(':id')
-  async deleteItem(@Param('id') id: number) {
+  async deleteCart() {
+    throw new NotImplementedException();
+  }
+
+  @ApiOperation({
+    summary: 'Update cart',
+  })
+  @Patch(':id')
+  async updateCart(): Promise<SaleRO> {
     throw new NotImplementedException();
   }
 }

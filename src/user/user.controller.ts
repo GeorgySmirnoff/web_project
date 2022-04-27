@@ -7,6 +7,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SaleRO } from '../sale/sale.interface';
 @ApiTags('user')
 @Controller('user')
 export class UserController {
@@ -43,6 +44,22 @@ export class UserController {
   })
   @Delete(':id')
   async deleteSale(@Param('id') id: number) {
+    throw new NotImplementedException();
+  }
+
+  @ApiOperation({
+    summary: 'Add new user',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User is added.',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Not found',
+  })
+  @Post(':name')
+  async addUser(): Promise<SaleRO> {
     throw new NotImplementedException();
   }
 }

@@ -4,6 +4,7 @@ import {
   Delete,
   Param,
   Controller,
+  Patch,
   NotImplementedException,
 } from '@nestjs/common';
 
@@ -30,7 +31,7 @@ export class SaleController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Sale not found.',
+    description: 'Sale is not found.',
   })
   @Get(':id')
   async getItem(@Param('id') id: number): Promise<SaleRO> {
@@ -38,18 +39,18 @@ export class SaleController {
   }
 
   @ApiOperation({
-    summary: 'Add new item',
+    summary: 'Add new sale',
   })
   @ApiResponse({
     status: 200,
-    description: 'item is added.',
+    description: 'Sale is added.',
   })
   @ApiResponse({
-    status: 403,
-    description: 'Forbidden.',
+    status: 404,
+    description: 'Not found',
   })
-  @Post('add/:name')
-  async addItem(@Param('name') name: string): Promise<SaleRO> {
+  @Post(':name')
+  async addSale(@Param('name') name: string): Promise<SaleRO> {
     throw new NotImplementedException();
   }
 
@@ -61,15 +62,31 @@ export class SaleController {
     description: 'Sale is deleted.',
   })
   @ApiResponse({
-    status: 403,
-    description: 'Forbidden.',
-  })
-  @ApiResponse({
     status: 404,
-    description: 'Sale not found.',
+    description: 'Not found',
   })
   @Delete(':id')
-  async deleteItem(@Param('id') id: number): Promise<SaleRO> {
+  async deleteSale(@Param('id') id: number): Promise<SaleRO> {
+    throw new NotImplementedException();
+  }
+
+  @ApiOperation({
+    summary: 'Get all sales',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Sale is deleted.',
+  })
+  @Get()
+  async getAllSales(): Promise<SaleRO[]> {
+    throw new NotImplementedException();
+  }
+
+  @ApiOperation({
+    summary: 'Update sale',
+  })
+  @Patch(':id')
+  async updateSale(): Promise<SaleRO> {
     throw new NotImplementedException();
   }
 }

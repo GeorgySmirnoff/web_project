@@ -5,6 +5,9 @@ import {
   Param,
   Controller,
   NotImplementedException,
+  Body,
+  ParseIntPipe,
+  Patch,
 } from '@nestjs/common';
 
 import {
@@ -14,12 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ItemService } from './item.service';
-import { ItemRO } from './item.interface';
+import { ItemCreateDto } from './dto/item.create.dto';
+import { ItemUpdateDto } from './dto/item.update.dto';
+import { Item } from '@prisma/client';
 
 @ApiTags('item')
 @Controller('item')
 export class ItemController {
-  constructor(private readonly memberService: ItemService) {}
+  constructor(private readonly itemService: ItemService) {}
 
   @ApiOperation({
     summary: 'Get Item',
@@ -33,28 +38,32 @@ export class ItemController {
     description: 'Item not found.',
   })
   @Get(':id')
-  async getItem(): Promise<ItemRO> {
-    throw new NotImplementedException();
+  async getItemById(@Param('id', ParseIntPipe) id: number): Promise<Item> {
+    return this.itemService.getItemById({ id: id });
+  }
+
+  @Get('get/all')
+  async getAll(): Promise<Item[]> {
+    return this.itemService.getAll();
   }
 
   @ApiOperation({
-    summary: 'Add new item',
+    summary: 'Add new Item',
   })
   @ApiResponse({
     status: 200,
-    description: 'item is added.',
+    description: 'Item is added.',
   })
   @ApiResponse({
     status: 403,
     description: 'Forbidden.',
   })
-  @Post(':name')
-  async addItem(): Promise<ItemRO> {
-    throw new NotImplementedException();
+  @Post()
+  async addItem(@Body() itemCreateDto: ItemCreateDto): Promise<Item> {
+    return this.itemService.addItem(itemCreateDto);
   }
-
   @ApiOperation({
-    summary: 'Delete item by id.r',
+    summary: 'Delete Item by id.r',
   })
   @ApiResponse({
     status: 200,
@@ -69,7 +78,15 @@ export class ItemController {
     description: 'Item not found.',
   })
   @Delete(':id')
-  async deleteItem(@Param('id') id: number): Promise<ItemRO> {
-    throw new NotImplementedException();
+  async deleteItemById(@Param('id', ParseIntPipe) id: number): Promise<Item> {
+    return this.itemService.deleteItemById({ id: id });
+  }
+
+  @Patch('update/:id')
+  async updateItemById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() itemUpdateDto: ItemUpdateDto,
+  ): Promise<Item> {
+    return this.itemService.updateItemById({ id: id }, itemUpdateDto);
   }
 }

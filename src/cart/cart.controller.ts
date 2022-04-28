@@ -8,7 +8,6 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SaleRO } from '../sale/sale.interface';
 
 @ApiTags('cart')
 @Controller('cart')
@@ -65,7 +64,7 @@ export class CartController {
     summary: 'Update cart',
   })
   @Patch(':id')
-  async updateCart(): Promise<SaleRO> {
+  async updateCart() {
     throw new NotImplementedException();
   }
 }

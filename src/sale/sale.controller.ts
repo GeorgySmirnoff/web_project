@@ -4,8 +4,10 @@ import {
   Delete,
   Param,
   Controller,
-  Patch,
   NotImplementedException,
+  Body,
+  ParseIntPipe,
+  Patch,
 } from '@nestjs/common';
 
 import {
@@ -15,12 +17,16 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { SaleService } from './sale.service';
-import { SaleRO } from './sale.interface';
+import { SaleCreateDto } from './dto/sale.create.dto';
+import { SaleUpdateDto } from './dto/sale.update.dto';
+import { Sale } from '@prisma/client';
 
 @ApiTags('sale')
 @Controller('sale')
+@ApiTags('sale')
+@Controller('sale')
 export class SaleController {
-  constructor(private readonly memberService: SaleService) {}
+  constructor(private readonly saleService: SaleService) {}
 
   @ApiOperation({
     summary: 'Get Sale',
@@ -34,8 +40,8 @@ export class SaleController {
     description: 'Sale is not found.',
   })
   @Get(':id')
-  async getItem(@Param('id') id: number): Promise<SaleRO> {
-    throw new NotImplementedException();
+  async getSaleById(@Param('id', ParseIntPipe) id: number): Promise<Sale> {
+    return this.saleService.getSaleById({ id: id });
   }
 
   @ApiOperation({
@@ -49,9 +55,9 @@ export class SaleController {
     status: 404,
     description: 'Not found',
   })
-  @Post(':name')
-  async createSale(): Promise<SaleRO> {
-    throw new NotImplementedException();
+  @Post()
+  async addSale(@Body() saleCreteDto: SaleCreateDto): Promise<Sale> {
+    return this.saleService.addSale(saleCreteDto);
   }
 
   @ApiOperation({
@@ -66,8 +72,8 @@ export class SaleController {
     description: 'Not found',
   })
   @Delete(':id')
-  async deleteSale(@Param('id') id: number): Promise<SaleRO> {
-    throw new NotImplementedException();
+  async deleteSaleById(@Param('id', ParseIntPipe) id: number): Promise<Sale> {
+    return this.saleService.deleteSaleById({ id: id });
   }
 
   @ApiOperation({
@@ -78,15 +84,18 @@ export class SaleController {
     description: 'Sale is deleted.',
   })
   @Get()
-  async getAllSales(): Promise<SaleRO[]> {
-    throw new NotImplementedException();
+  async getAll(): Promise<Sale[]> {
+    return this.saleService.getAll();
   }
 
   @ApiOperation({
     summary: 'Update sale',
   })
-  @Patch(':id')
-  async updateSale(): Promise<SaleRO> {
-    throw new NotImplementedException();
+  @Patch('update/:id')
+  async updateSaleById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() saleUpdateDto: SaleUpdateDto,
+  ): Promise<Sale> {
+    return this.saleService.updateSaleById({ id: id }, saleUpdateDto);
   }
 }

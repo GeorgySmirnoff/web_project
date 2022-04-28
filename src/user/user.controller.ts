@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -7,10 +8,14 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SaleRO } from '../sale/sale.interface';
+import { UserService } from './user.service';
+import { User } from '@prisma/client';
+import { UserCreateDto } from './dto/user.create.dto';
+
 @ApiTags('user')
 @Controller('user')
 export class UserController {
+  constructor(private readonly userService: UserService) {}
   @ApiOperation({
     summary: 'Get user',
   })
@@ -23,8 +28,8 @@ export class UserController {
     description: 'User not found.',
   })
   @Get(':id')
-  async getUser(@Param('id') id: number) {
-    throw new NotImplementedException();
+  async getUserById(@Param('id') id: number): Promise<User> {
+    return this.userService.getUserById({ id: id });
   }
 
   @ApiOperation({
@@ -43,8 +48,8 @@ export class UserController {
     description: 'User not found.',
   })
   @Delete(':id')
-  async deleteSale(@Param('id') id: number) {
-    throw new NotImplementedException();
+  async deleteUserById(@Param('id') id: number): Promise<User> {
+    return this.userService.deleteUserById({ id: id });
   }
 
   @ApiOperation({
@@ -58,8 +63,8 @@ export class UserController {
     status: 404,
     description: 'Not found',
   })
-  @Post(':name')
-  async addUser(): Promise<SaleRO> {
-    throw new NotImplementedException();
+  @Post()
+  async addUser(@Body() userCreateDto: UserCreateDto): Promise<User> {
+    return this.userService.addUser(userCreateDto);
   }
 }

@@ -30,7 +30,7 @@ export class UserService {
       );
     }
 
-    return this.prismaService.user.findFirst({ where: id });
+    return this.prismaService.user.findUnique({ where: id });
   }
 
   public async getAll(): Promise<User[] | null> {

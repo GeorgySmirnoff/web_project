@@ -42,7 +42,7 @@ export class ItemController {
     return this.itemService.getItemById({ id: id });
   }
 
-  @Get('get/all')
+  @Get('all')
   async getAll(): Promise<Item[]> {
     return this.itemService.getAll();
   }
@@ -82,7 +82,7 @@ export class ItemController {
     return this.itemService.deleteItemById({ id: id });
   }
 
-  @Patch('update/:id')
+  @Patch(':id')
   async updateItemById(
     @Param('id', ParseIntPipe) id: number,
     @Body() itemUpdateDto: ItemUpdateDto,

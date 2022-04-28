@@ -5,6 +5,7 @@ import {
   Get,
   NotImplementedException,
   Param,
+  ParseIntPipe,
   Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -28,7 +29,7 @@ export class UserController {
     description: 'User not found.',
   })
   @Get(':id')
-  async getUserById(@Param('id') id: number): Promise<User> {
+  async getUserById(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.getUserById({ id: id });
   }
 

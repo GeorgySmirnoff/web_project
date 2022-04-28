@@ -91,7 +91,7 @@ export class SaleController {
   @ApiOperation({
     summary: 'Update sale',
   })
-  @Patch('update/:id')
+  @Patch(':id')
   async updateSaleById(
     @Param('id', ParseIntPipe) id: number,
     @Body() saleUpdateDto: SaleUpdateDto,

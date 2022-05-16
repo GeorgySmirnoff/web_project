@@ -8,6 +8,7 @@ import {
 } from 'class-validator';
 import { Cart } from '../../cart/cart.interface';
 import { Prisma } from '@prisma/client';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class ItemCreateDto implements Prisma.ItemCreateInput {
   category: Prisma.ItemCategoryCreateNestedOneWithoutItemInput;
@@ -19,20 +20,26 @@ export class ItemCreateDto implements Prisma.ItemCreateInput {
 
   @IsUrl()
   @IsOptional()
+  @ApiProperty()
   public image: string;
 
   @IsString()
   @IsOptional()
+  @ApiProperty()
   public description: string;
 
   @IsNumber()
+  @ApiProperty()
   public price: number;
 
   @IsNumber()
+  @ApiProperty()
   public categoryId: number;
 
   @IsNumber()
+  @ApiProperty()
   public cartId: number;
 
+  @ApiProperty()
   public carts: Cart[];
 }

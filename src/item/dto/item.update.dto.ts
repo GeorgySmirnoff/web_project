@@ -6,6 +6,7 @@ import {
   IsUrl,
   Length,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class ItemUpdateDto {
   @IsString()
@@ -15,18 +16,23 @@ export class ItemUpdateDto {
 
   @IsUrl()
   @IsOptional()
+  @ApiProperty()
   public image: string;
 
   @IsString()
   @IsOptional()
+  @ApiProperty()
   public description: string;
 
   @IsNumber()
+  @ApiProperty()
   public price: number;
 
   @IsNumber()
+  @ApiProperty()
   public categoryId: number;
 
   @IsNumber()
+  @ApiProperty()
   public cartId: number;
 }

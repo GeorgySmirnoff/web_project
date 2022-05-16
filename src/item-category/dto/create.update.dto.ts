@@ -1,7 +1,8 @@
 import { IsDefined, IsString, IsUrl, Length } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
+import { Item } from "@prisma/client";
 
-export class SaleUpdateDto {
+export class CategoryUpdateDto {
   @IsString()
   @Length(0, 255)
   @IsDefined()
@@ -11,10 +12,7 @@ export class SaleUpdateDto {
   @IsUrl()
   @IsDefined()
   @ApiProperty()
-  public image: string;
+  public item: Item;
 
-  @IsString()
-  @IsDefined()
-  @ApiProperty()
-  public description: string;
+
 }

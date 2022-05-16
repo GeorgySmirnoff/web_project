@@ -5,6 +5,9 @@ import {
   Param,
   Controller,
   NotImplementedException,
+  Body,
+  ParseIntPipe,
+  Patch,
 } from '@nestjs/common';
 
 import {
@@ -13,13 +16,18 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { ItemCategoryService } from './item-category.service';
-import { ItemCategoryRO } from './item-category.interface';
+
+import { CategoryService } from './item-category.service';
+import { CategoryCreateDto } from './dto/category.create.dto';
+import { ItemCategory } from '@prisma/client';
+import { CategoryUpdateDto } from './dto/create.update.dto';
 
 @ApiTags('category')
 @Controller('category')
-export class ItemCategoryController {
-  constructor(private readonly memberService: ItemCategoryService) {}
+@ApiTags('category')
+@Controller('category')
+export class CategoryController {
+  constructor(private readonly categoryService: CategoryService) {}
 
   @ApiOperation({
     summary: 'Get Category',
@@ -30,27 +38,13 @@ export class ItemCategoryController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Category not found.',
+    description: 'Category is not found.',
   })
   @Get(':id')
-  async getCategoryById(): Promise<ItemCategoryRO> {
-    throw new NotImplementedException();
-  }
-
-  @ApiOperation({
-    summary: 'Get category by name',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Category is found.',
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Category not found.',
-  })
-  @Get(':name')
-  async getCategoryByName(): Promise<ItemCategoryRO> {
-    throw new NotImplementedException();
+  async getCategoryById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<ItemCategory> {
+    return this.categoryService.getCategoryById({ id: id });
   }
 
   @ApiOperation({
@@ -58,34 +52,60 @@ export class ItemCategoryController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Category is added.',
+    description: 'category is added.',
   })
   @ApiResponse({
-    status: 403,
-    description: 'Forbidden.',
+    status: 404,
+    description: 'Not found',
   })
-  @Post(':name')
-  async addCategory(@Param('name') name: string): Promise<ItemCategoryRO> {
-    throw new NotImplementedException();
+  @Post()
+  async addCategory(
+    @Body() categoryCreteDto: CategoryCreateDto,
+  ): Promise<ItemCategory> {
+    return this.categoryService.addCategory(categoryCreteDto);
   }
 
   @ApiOperation({
-    summary: 'Delete category by id',
+    summary: 'Delete category by id.r',
   })
   @ApiResponse({
     status: 200,
     description: 'Category is deleted.',
   })
   @ApiResponse({
-    status: 403,
-    description: 'Forbidden.',
-  })
-  @ApiResponse({
     status: 404,
-    description: 'Category not found.',
+    description: 'Not found',
   })
   @Delete(':id')
-  async deleteCategory(@Param('id') id: number): Promise<ItemCategoryRO> {
-    throw new NotImplementedException();
+  async deleteCategoryById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<ItemCategory> {
+    return this.categoryService.deleteCategoryById({ id: id });
+  }
+
+  @ApiOperation({
+    summary: 'Get all category',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Category is deleted.',
+  })
+  @Get()
+  async getAll(): Promise<ItemCategory[]> {
+    return this.categoryService.getAll();
+  }
+
+  @ApiOperation({
+    summary: 'Update category',
+  })
+  @Patch(':id')
+  async updateCategoryById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() categoryUpdateDto: CategoryUpdateDto,
+  ): Promise<ItemCategory> {
+    return this.categoryService.updateCategoryById(
+      { id: id },
+      categoryUpdateDto,
+    );
   }
 }

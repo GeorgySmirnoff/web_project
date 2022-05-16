@@ -38,8 +38,10 @@ export class ItemCreateDto implements Prisma.ItemCreateInput {
 
   @IsNumber()
   @ApiProperty()
-  public cartId: number;
+  @IsOptional()
+  public cartId: number | null;
 
   @ApiProperty()
-  public carts: Cart[];
+  @IsOptional()
+  public carts: Cart[] | null;
 }

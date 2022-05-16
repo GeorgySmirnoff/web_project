@@ -7,6 +7,7 @@ import {
   Length,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Cart } from '../../cart/cart.interface';
 
 export class ItemUpdateDto {
   @IsString()
@@ -35,4 +36,8 @@ export class ItemUpdateDto {
   @IsNumber()
   @ApiProperty()
   public cartId: number;
+
+  @ApiProperty()
+  @IsOptional()
+  public carts: Cart[];
 }

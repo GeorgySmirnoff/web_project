@@ -5,8 +5,6 @@ import { AppModule } from './app.module';
 import * as hbs from 'hbs';
 import { LoadingInterceptor } from './timeInterceptop';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { SupertokensExceptionFilter } from './auth/auth.filter';
-import supertokens from 'supertokens-node';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -19,13 +17,6 @@ async function bootstrap() {
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
 
   app.useGlobalInterceptors(new LoadingInterceptor());
-
-  app.enableCors({
-    origin: ['http://localhost:80/'], // TODO: URL of the website domain
-    allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
-    credentials: true,
-  });
-  app.useGlobalFilters(new SupertokensExceptionFilter());
 
   const config = new DocumentBuilder().build();
   const document = SwaggerModule.createDocument(app, config);

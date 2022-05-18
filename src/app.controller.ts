@@ -37,4 +37,11 @@ export class AppController {
   root5() {
     return {};
   }
+
+  @ApiExcludeEndpoint()
+  @Get('chat')
+  @Render('chat')
+  root6() {
+    return {};
+  }
 }

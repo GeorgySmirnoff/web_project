@@ -7,10 +7,11 @@ import { SaleModule } from './sale/sale.module';
 import { UserModule } from './user/user.module';
 import { CartService } from './cart/cart.service';
 import { CartModule } from './cart/cart.module';
+import { AppGateway } from './app.gateway';
 
 @Module({
   imports: [ItemModule, CategoryModule, SaleModule, UserModule, CartModule],
   controllers: [AppController],
-  providers: [AppService, CartService],
+  providers: [AppService, CartService, AppGateway],
 })
 export class AppModule {}

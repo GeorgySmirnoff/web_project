@@ -24,18 +24,15 @@ export class ItemService {
     });
 
     if (itemsNum == 0) {
-      throw new HttpException(
-        { status: HttpStatus.NOT_FOUND, error: 'Item not found' },
-        HttpStatus.NOT_FOUND,
-      );
+      throw new NotFoundException('Item not found');
     }
 
     return this.prismaService.item.findFirst({ where: id });
   }
 
-  public async getAll(): Promise<Item[] | null> {
-    return this.prismaService.item.findMany();
-  }
+  // public async getAll(): Promise<Item[] | null> {
+  //   return this.prismaService.item.findMany();
+  // }
 
   public async deleteItemById(id: Prisma.ItemWhereUniqueInput): Promise<Item> {
     return this.prismaService.item.delete({ where: id });

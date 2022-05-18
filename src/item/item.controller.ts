@@ -42,10 +42,10 @@ export class ItemController {
     return this.itemService.getItemById({ id: id });
   }
 
-  @Get('all')
-  async getAll(): Promise<Item[]> {
-    return this.itemService.getAll();
-  }
+  // @Get('all')
+  // async getAll(): Promise<Item[]> {
+  //   return this.itemService.getAll();
+  // }
 
   @ApiOperation({
     summary: 'Add new Item',

@@ -7,7 +7,6 @@ import { SaleModule } from './sale/sale.module';
 import { UserModule } from './user/user.module';
 import { CartService } from './cart/cart.service';
 import { CartModule } from './cart/cart.module';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [ItemModule, CategoryModule, SaleModule, UserModule, CartModule],

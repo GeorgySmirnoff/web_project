@@ -24,10 +24,7 @@ export class SaleService {
     });
 
     if (salesNum == 0) {
-      throw new HttpException(
-        { status: HttpStatus.NOT_FOUND, error: 'Sale not found' },
-        HttpStatus.NOT_FOUND,
-      );
+      throw new NotFoundException('Sale not found');
     }
 
     return this.prismaService.sale.findFirst({ where: id });

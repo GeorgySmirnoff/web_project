@@ -24,10 +24,7 @@ export class UserService {
     });
 
     if (usersNum == 0) {
-      throw new HttpException(
-        { status: HttpStatus.NOT_FOUND, error: 'User not found' },
-        HttpStatus.NOT_FOUND,
-      );
+      throw new NotFoundException('User not found');
     }
 
     return this.prismaService.user.findUnique({ where: id });

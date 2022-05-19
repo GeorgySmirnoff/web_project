@@ -21,7 +21,14 @@
         <input type="text" v-model="name" id="username" class="form-control" placeholder="Enter name...">
         <br>
         <div class="card">
-          <div id="messages" class="card-block"></div>
+          <div id="messages" class="card-block">
+
+            {{#each messages }}
+                <div>
+                  {{ this.name }}:{{ this.text }}
+                </div>
+            {{/each}}
+          </div>
         </div>
         <br>
         <textarea id="textarea" class="form-control" v-model="text" placeholder="Enter message..."></textarea>

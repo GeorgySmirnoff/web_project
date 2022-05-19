@@ -1,8 +1,10 @@
 import { Get, Controller, Render } from '@nestjs/common';
 import { ApiExcludeEndpoint } from '@nestjs/swagger';
+import { GatewayService } from './gateway/gateway.service';
 
 @Controller()
 export class AppController {
+  constructor(private gatewayService: GatewayService) {}
   @ApiExcludeEndpoint()
   @Get('/')
   @Render('index')
@@ -41,7 +43,9 @@ export class AppController {
   @ApiExcludeEndpoint()
   @Get('chat')
   @Render('chat')
-  root6() {
-    return {};
+  async root6() {
+    return {
+      messages: await this.gatewayService.getMessages(),
+    };
   }
 }

@@ -11,10 +11,11 @@ export class GatewayService {
     message.name = name;
     message.text = text;
 
-    await this.dbService.message.create(message);
+    await this.dbService.message.create({ data: message });
   }
 
   async getMessages() {
+    console.log(await this.dbService.message.findMany());
     return await this.dbService.message.findMany();
   }
 }

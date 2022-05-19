@@ -8,9 +8,10 @@ import { UserModule } from './user/user.module';
 import { CartService } from './cart/cart.service';
 import { CartModule } from './cart/cart.module';
 import { AppGateway } from './app.gateway';
+import { GatewayModule } from './gateway/gateway.module';
 
 @Module({
-  imports: [ItemModule, CategoryModule, SaleModule, UserModule, CartModule],
+  imports: [ItemModule, CategoryModule, SaleModule, UserModule, CartModule, GatewayModule],
   controllers: [AppController],
   providers: [AppService, CartService, AppGateway],
 })

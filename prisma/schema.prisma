@@ -51,3 +51,8 @@ model ItemCategory {
   name String @unique
   Item Item?
 }
+model Message {
+  id      Int      @id @default(autoincrement())
+  text String
+  name String
+}
